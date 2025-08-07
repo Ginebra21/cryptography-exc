@@ -32,15 +32,19 @@ def aes_decrypt(ciphertext, key, iv):
 
 # PRUEBA 1 - AES
 pacientes = [
-    {"nombre": "Andrés Torres", "edad": 60, "grupo_sanguineo": "O-", "diagnostico": "Diabetes tipo 2", "sintomas": "Pérdida de peso, visión borrosa", "tratamiento": "Insulina, Glibenclamida", "recomendaciones": "Monitoreo glucémico intensivo, cambio en hábitos alimenticios"},
-    {"nombre": "Carlos Méndez", "edad": 58, "grupo_sanguineo": "O+", "diagnostico": "Diabetes tipo 2", "sintomas": "Fatiga, sed excesiva, visión borrosa", "tratamiento": "Metformina, Insulina", "recomendaciones": "Control glicémico, dieta baja en carbohidratos, ejercicio regular"},
-    {"nombre": "Diego Londoño", "edad": 29, "grupo_sanguineo": "A+", "diagnostico": "Miastenia gravis", "sintomas": "Debilidad muscular, visión doble", "tratamiento": "Piridostigmina, Corticoides", "recomendaciones": "Terapia inmunosupresora, ejercicios de respiración"},
-    {"nombre": "Elena Vargas", "edad": 43, "grupo_sanguineo": "B+", "diagnostico": "Asma", "sintomas": "Sibilancias, dificultad para respirar", "tratamiento": "Formoterol, Fluticasona", "recomendaciones": "Terapia broncodilatadora, evitar factores desencadenantes"},
-    {"nombre": "Isabela Fonseca", "edad": 41, "grupo_sanguineo": "B+", "diagnostico": "Síndrome de Cushing", "sintomas": "Obesidad central, cara redonda", "tratamiento": "Ketoconazol, Mifepristona", "recomendaciones": "Cirugía si hay tumor, tratamiento endocrinológico"},
-    {"nombre": "Juana Cárdenas", "edad": 55, "grupo_sanguineo": "A-", "diagnostico": "Hipertensión arterial", "sintomas": "Zumbido en los oídos, dificultad para dormir", "tratamiento": "Losartán, Hidroclorotiazida", "recomendaciones": "Monitoreo de presión arterial, control de peso"}
-]
+    {"Andrés Torres	60	O-	Diabetes tipo 2	Pérdida de peso, visión borrosa	Insulina, Glibenclamida	Monitoreo glucémico intensivo, cambio en hábitos alimenticios"},
+    {"Carlos Méndez	58	O+	Diabetes tipo 2	Fatiga, sed excesiva, visión borrosa	Metformina, Insulina	Control glicémico, dieta baja en carbohidratos, ejercicio regular"},
+    {"Diego Londoño	29	A+	Miastenia gravis	Debilidad muscular, visión doble	Piridostigmina, Corticoides	Terapia inmunosupresora, ejercicios de respiración"},
+    {"Elena Vargas	43	B+	Asma	Sibilancias, dificultad para respirar	Formoterol, Fluticasona	Terapia broncodilatadora, evitar factores desencadenantes"},
+    {"Isabela Fonseca	41	B+	Síndrome de Cushing	Obesidad central, cara redonda	Ketoconazol, Mifepristona	Cirugía si hay tumor, tratamiento endocrinológico"},
+    {"Juan  a Cárdenas	55	A-	Hipertensión arterial	Zumbido en los oídos, dificultad para dormir	Losartán, Hidroclorotiazida	Monitoreo de presión arterial, control de peso"},
+    {"María Gómez	50	AB+	Asma	Dificultad para respirar, tos	Salbutamol, Budesonida	Inhaladores, evitar alérgenos, terapia respiratoria"},
+    {"Pedro Acosta	72	B-	Colesterol alto	Dolor en el pecho, fatiga	Atorvastatina	Dieta baja en grasas, ejercicio aeróbico, monitoreo regular"},
+    {"Samuel Ríos	68	AB-	Colesterol alto	Fatiga, dolor en piernas	Rosuvastatina	Mejorar dieta, evitargrasas saturadas, ejercicio regular"},
+    {"Tomás Herrera	52	AB-	Esclerosis lateral amiotrófica	Debilidad muscular progresiva	Riluzol, Edaravona	Rehabilitación, fisioterapia, asistencia respiratoria"},
+    {"Valentina Duarte	35	O+	Síndrome de Ehlers-Danlos	Hiperflexibilidad, dolor articular	Analgésicos, suplementos de colágeno	Fisioterapia, uso de ortesis, monitoreo genético"}
 
-# Convertimos a JSON para cifrar como texto
+# Se debe convertir la información a JSON para cifrar como texto
 pacientes_json = json.dumps(pacientes)
 
 cifrado = aes_encrypt(pacientes_json, key, iv)
@@ -58,7 +62,7 @@ print(json.dumps(pacientes_descifrados, indent=2, ensure_ascii=False))
 
 # CRYPTOGRAPHY SCRIPTS TRIAL RSA
 
-# Generar par de claves
+# Generar par de claves cifrado y descifrado
 private_key = rsa.generate_private_key(
     public_exponent=65537,
     key_size=2048,
@@ -88,7 +92,7 @@ def rsa_decrypt(ciphertext, private_key):
     )
     return plaintext.decode()
 
-# PRUEBA 2 - RSA
+# PRUEBA 2 - RSA. Al ser un proceso más lento, éste no permite un cifrado de información de gran escala
 
 paciente_rsa = "Lucía Ramírez, 65, A+, Hipertensión arterial, Dolor de cabeza, mareo, visión borrosa, Lisinopril, Amlodipino, Reducción de sal, actividad física, control del estrés"
 
